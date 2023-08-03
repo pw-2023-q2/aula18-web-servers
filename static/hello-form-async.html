@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>"Hello world" form</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <style>
+            .error {
+                border: red;
+                border-radius: 5px;
+                box-shadow: 0 0 10px red;
+            }
+        </style>
+        <script>
+            "use strict";
+
+            let isTextValid = ($field) => {
+                console.log($field.val().trim() == '');
+                if ($field.val().trim() == '') {
+                    $field.addClass('error').on('input', (ev) => {
+                        $(ev.target).removeClass('error');
+                    });
+                    return false;
+                }
+                return true;
+            };
+
+            let main = () => {
+                $('input[type=submit]').on('click', (ev) => {
+                    let $fname = $('#fname');
+                    let $lname = $('#lname');
+                    let hasError = false;
+
+                    if (isTextValid($fname) && isTextValid($lname)) {
+                        let reqData = {
+                            'first-name': $fname.val(),
+                            'last-name': $lname.val()
+                        };
+
+                        $.post($('form').attr('action'), reqData, (resp) => {
+                            $('#message-area').html(resp);
+                        });
+                    }
+                    
+                    ev.preventDefault();
+                });
+            };
+
+            $(document).ready(main);
+        </script>
+    </head>
+    <body>
+        <form action="http://localhost:3000/process2" method="POST">
+            <input type="text" id="fname" name="fname" placeholder="First name">
+            <input type="text" id="lname" name="lname" placeholder="Last name">
+            <input type="submit">
+        </form>
+        <p id="message-area"></p>
+    </body>
+</html>

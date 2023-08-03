@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Test server routes</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            "use strict";
+            const URL = 'http://localhost:3000';
+
+            let main = () => {
+                $('#get-btn').on('click', () => {
+                    $.get(URL, (resp) => {
+                        $('#resp-area').html(resp);
+                    });
+                });
+                $('#post-btn').on('click', () => {
+                    $.post(URL, (resp) => {
+                        $('#resp-area').html(resp);
+                    });
+                });
+            };
+
+            $(document).ready(main);
+        </script>
+    </head>
+    
+    <body>
+        <button id="get-btn">GET</button>
+        <button id="post-btn">POST</button>
+        <div id="resp-area"></div>
+    </body>
+</html>

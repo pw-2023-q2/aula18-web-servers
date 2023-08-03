@@ -1,0 +1,13 @@
+{
+  "name": "server-basic",
+  "version": "1.0.0",
+  "description": "Basic server examples with Node and Express",
+  "main": "index.js",
+  "author": "Diogo S. Martins",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.6",
+    "express": "^4.18.2"
+  }
+}
